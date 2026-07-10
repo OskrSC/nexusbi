@@ -22,6 +22,22 @@ def layout():
                                    className="text-info font-weight-bold"),
                             "."
                         ], className="text-light"),
+                        
+                        # <-- EL COMPONENTE DE SUBIDA QUE FALTABA -->
+                        dcc.Upload(
+                            id='m1-upload-data',
+                            children=html.Div(['Arrastra y suelta o ', html.A('Selecciona Archivo', className="text-info")]),
+                            style={
+                                'width': '100%', 'height': '60px', 'lineHeight': '60px',
+                                'borderWidth': '1px', 'borderStyle': 'dashed',
+                                'borderRadius': '5px', 'textAlign': 'center', 
+                                'margin': '10px 0',
+                                'backgroundColor': '#333', 'color': 'white',
+                                'borderColor': '#555'
+                            }
+                        ),
+                        # ---------------------------------------- -->
+
                         html.Hr(className="border-secondary"),
                         html.Label("Número de Clusters (K-Means):", className="text-light"),
                         dcc.Slider(id='m1-k-clusters', min=2, max=8, step=1, value=3),
