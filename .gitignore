@@ -1,0 +1,15 @@
+# Entornos virtuales
+venv/
+env/
+
+# Datos generados en tiempo de ejecución (se crean solos en el contenedor)
+data/
+
+# Archivos de sistema de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Archivos de entorno
+.env
