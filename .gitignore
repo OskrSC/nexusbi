@@ -2,9 +2,6 @@
 venv/
 env/
 
-# Datos generados en tiempo de ejecución (se crean solos en el contenedor)
-data/
-
 # Archivos de sistema de Python
 __pycache__/
 *.py[cod]
@@ -13,3 +10,9 @@ __pycache__/
 
 # Archivos de entorno
 .env
+
+# Datos de ejecución (Ignoramos carpetas específicas, NO la carpeta data entera)
+data/uploads/
+data/models/
+data/cache/
+data/nexusbi.db

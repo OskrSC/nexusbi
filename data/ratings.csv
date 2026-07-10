@@ -1,0 +1,14 @@
+User_ID,Item_ID,Rating
+User1,Producto_A,5
+User1,Producto_B,3
+User2,Producto_A,4
+User2,Producto_C,5
+User2,Producto_D,2
+User3,Producto_B,4
+User3,Producto_C,3
+User4,Producto_A,2
+User4,Producto_D,5
+User5,Producto_B,2
+User5,Producto_C,4
+User6,Producto_A,5
+User6,Producto_D,4

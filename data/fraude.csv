@@ -1,0 +1,10 @@
+Amount,Frequency,IsForeignTransaction,IsHighRiskCountry,IsWeekend,Fraud
+20,5,0,0,0,0
+4500,1,1,1,1,1
+3000,1,1,1,0,1
+15,6,0,0,0,0
+500,1,1,1,0,1
+35,4,0,0,1,0
+10,8,0,0,0,0
+2000,1,0,1,1,1
+50,2,0,0,0,0

@@ -1,0 +1,17 @@
+CaseID,Activity
+1,Inicio
+1,Revisar Documentos
+1,Aprobar
+2,Inicio
+2,Revisar Documentos
+2,Rechazar
+3,Inicio
+3,Revisar Documentos
+3,Pedir Info Extra
+3,Revisar Documentos
+3,Aprobar
+4,Inicio
+4,Revisar Documentos
+4,Rechazar
+5,Inicio
+5,Aprobar
