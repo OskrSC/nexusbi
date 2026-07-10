@@ -6,52 +6,48 @@ def layout():
     Layout del Módulo 1: Customer Intelligence & Marketing.
     """
     return dbc.Container([
-        html.H2("Módulo 1: Customer Intelligence & Marketing", className="mt-4 mb-4"),
+        html.H2("Módulo 1: Customer Intelligence & Marketing", className="mt-4 mb-4 text-light"),
         
         dbc.Row([
-            # Panel de Control Izquierdo (Subida de datos y configuración)
+            # Panel de Control Izquierdo
             dbc.Col([
                 dbc.Card([
-                    dbc.CardHeader("Configuración del Modelo"),
+                    dbc.CardHeader("Configuración del Modelo", className="bg-secondary text-light"),
                     dbc.CardBody([
-                        html.P("Sube tu archivo CSV de clientes (conteniendo Edad, Ingresos, Puntuación de Gasto, etc.):"),
-                        dcc.Upload(
-                            id='m1-upload-data',
-                            children=html.Div(['Arrastra y suelta o ', html.A('Selecciona Archivo')]),
-                            style={
-                                'width': '100%', 'height': '60px', 'lineHeight': '60px',
-                                'borderWidth': '1px', 'borderStyle': 'dashed',
-                                'borderRadius': '5px', 'textAlign': 'center', 'margin': '10px 0'
-                            },
-                            multiple=False
-                        ),
-                        html.Hr(),
-                        html.Label("Número de Clusters (K-Means):"),
+                        html.P([
+                            "Sube un archivo CSV de clientes (conteniendo Edad, Ingresos, Puntuación de Gasto, etc.) o ",
+                            html.A("descarga el archivo de prueba aquí", 
+                                   href="https://raw.githubusercontent.com/OskrSC/nexusbi/main/data/clientes_test.csv", 
+                                   target="_blank", 
+                                   className="text-info font-weight-bold"),
+                            "."
+                        ], className="text-light"),
+                        html.Hr(className="border-secondary"),
+                        html.Label("Número de Clusters (K-Means):", className="text-light"),
                         dcc.Slider(id='m1-k-clusters', min=2, max=8, step=1, value=3),
                         html.Div(id='m1-data-status', className="text-muted small mt-2")
-                    ])
-                ], color="light")
+                    ], className="bg-dark")
+                ], color="dark")
             ], width=4),
             
-            # Panel de Visualización Derecho (Resultados)
+            # Panel de Visualización Derecho
             dbc.Col([
                 dbc.Card([
-                    dbc.CardHeader("Segmentación de Clientes (K-Means)"),
+                    dbc.CardHeader("Segmentación de Clientes (K-Means)", className="bg-secondary text-light"),
                     dbc.CardBody([
-                        # Este dcc.Graph será poblado por el callback del módulo
                         dcc.Graph(id='m1-clustering-graph', config={'displayModeBar': False})
-                    ])
-                ]),
+                    ], className="bg-dark")
+                ], color="dark", className="mb-3"),
                 
                 dbc.Card([
-                    dbc.CardHeader("Métricas de Cliente (CLV & Churn)"),
+                    dbc.CardHeader("Métricas de Cliente (CLV & Churn)", className="bg-secondary text-light"),
                     dbc.CardBody([
                         dbc.Row([
-                            dbc.Col([html.H5("CLV Promedio"), html.P("Cargando...", id='m1-clv-value')], width=6),
-                            dbc.Col([html.H5("Riesgo Churn"), html.P("Cargando...", id='m1-churn-value')], width=6)
+                            dbc.Col([html.H5("CLV Promedio", className="text-light"), html.P("Cargando...", id='m1-clv-value', className="text-info")], width=6),
+                            dbc.Col([html.H5("Riesgo Churn", className="text-light"), html.P("Cargando...", id='m1-churn-value', className="text-warning")], width=6)
                         ])
-                    ])
-                ], className="mt-3")
+                    ], className="bg-dark")
+                ], color="dark")
             ], width=8)
         ])
     ], fluid=True)

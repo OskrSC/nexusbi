@@ -22,9 +22,19 @@ def layout_forecast():
         dbc.CardBody([
             dbc.Row([
                 dbc.Col([
-                    html.P("Sube un CSV con una columna de 'Date' y otra de 'Sales'.", className="text-light"),
-                    dcc.Upload(id='m3-forecast-upload', children=html.Div(['Arrastra o ', html.A('Selecciona CSV', className="text-info")]),
-                        style={'width': '100%', 'height': '60px', 'lineHeight': '60px', 'borderWidth': '1px', 'borderStyle': 'dashed', 'borderColor': '#555', 'borderRadius': '5px', 'textAlign': 'center', 'margin': '10px 0', 'backgroundColor': '#333', 'color': 'white'}),
+                    html.P([
+                        "Sube un CSV con una columna de 'Date' y otra de 'Sales' o ",
+                        html.A("descarga el historial de ventas de prueba aquí", 
+                               href="https://raw.githubusercontent.com/OskrSC/nexusbi/main/data/ventas.csv", 
+                               target="_blank", 
+                               className="text-info font-weight-bold"),
+                        "."
+                    ], className="text-light"),
+                    dcc.Upload(
+                        id='m3-forecast-upload', 
+                        children=html.Div(['Arrastra o ', html.A('Selecciona CSV', className="text-info")]),
+                        style={'width': '100%', 'height': '60px', 'lineHeight': '60px', 'borderWidth': '1px', 'borderStyle': 'dashed', 'borderColor': '#555', 'borderRadius': '5px', 'textAlign': 'center', 'margin': '10px 0', 'backgroundColor': '#333', 'color': 'white'}
+                    ),
                     html.Hr(className="border-secondary"),
                     html.Label("Días a predecir:", className="text-light"),
                     dcc.Slider(id='m3-periods', min=7, max=90, step=1, value=30, marks={i: str(i) for i in [7, 30, 60, 90]})
@@ -37,7 +47,6 @@ def layout_forecast():
     ], color="dark")
 
 def layout_pricing():
-    # El optimizador de precios puede funcionar sin CSV (datos simulados)
     return dbc.Card([
         dbc.CardHeader("Optimización de Precios (Curva de Elasticidad)", className="bg-secondary text-light"),
         dbc.CardBody([
@@ -46,7 +55,7 @@ def layout_pricing():
                     html.P("Calcula el precio exacto para maximizar ingresos. (Usa datos de ejemplo por defecto).", className="text-light"),
                     html.Hr(className="border-secondary"),
                     html.H4("Resultado Óptimo:", className="text-light mt-4"),
-                    html.H2(id='m3-optimal-price', className="text-success"), # Se rellena con callback
+                    html.H2(id='m3-optimal-price', className="text-success"), 
                     html.P(id='m3-max-revenue', className="text-muted")
                 ], width=4),
                 dbc.Col([
@@ -62,21 +71,29 @@ def layout_fraud():
         dbc.CardBody([
             dbc.Row([
                 dbc.Col([
-                    html.P("Sube un CSV histórico con 'Amount', 'Frequency', 'IsForeignTransaction', 'IsHighRiskCountry', 'IsWeekend', 'Fraud'.", className="text-light mb-3"),
-                    dcc.Upload(id='m3-fraud-upload', children=html.Div(['Arrastra o ', html.A('Selecciona CSV', className="text-info")]),
-                        style={'width': '100%', 'height': '50px', 'lineHeight': '50px', 'borderWidth': '1px', 'borderStyle': 'dashed', 'borderColor': '#555', 'borderRadius': '5px', 'textAlign': 'center', 'margin': '10px 0', 'backgroundColor': '#333', 'color': 'white'}),
+                    html.P([
+                        "Sube un CSV histórico con 'Amount', 'Frequency', 'IsForeignTransaction', 'IsHighRiskCountry', 'IsWeekend', 'Fraud' o ",
+                        html.A("descarga el set de transacciones de prueba aquí", 
+                               href="https://raw.githubusercontent.com/OskrSC/nexusbi/main/data/fraude.csv", 
+                               target="_blank", 
+                               className="text-info font-weight-bold"),
+                        "."
+                    ], className="text-light mb-3"),
+                    dcc.Upload(
+                        id='m3-fraud-upload', 
+                        children=html.Div(['Arrastra o ', html.A('Selecciona CSV', className="text-info")]),
+                        style={'width': '100%', 'height': '50px', 'lineHeight': '50px', 'borderWidth': '1px', 'borderStyle': 'dashed', 'borderColor': '#555', 'borderRadius': '5px', 'textAlign': 'center', 'margin': '10px 0', 'backgroundColor': '#333', 'color': 'white'}
+                    ),
                     
                     html.Hr(className="border-secondary"),
                     html.H5("Simular Nueva Transacción:", className="text-light mt-3"),
                     
-                    # Formulario de simulación CORREGIDO con restricciones
                     dbc.Label("Monto ($):", className="text-light"), 
                     dcc.Input(id='f-amount', type='number', value=500, min=0, step=100, className="mb-2 form-control bg-dark text-light border-secondary"),
                     
                     dbc.Label("Frecuencia (Diaria):", className="text-light"), 
                     dcc.Input(id='f-freq', type='number', value=1, min=0, step=1, className="mb-2 form-control bg-dark text-light border-secondary"),
                     
-                    # Variables Binarias: min=0, max=1, step=1 (Solo permiten 0 ó 1)
                     dbc.Label("Transacción Extranjera (1=Sí, 0=No):", className="text-light"), 
                     dcc.Input(id='f-foreign', type='number', value=0, min=0, max=1, step=1, className="mb-2 form-control bg-dark text-light border-secondary"),
                     

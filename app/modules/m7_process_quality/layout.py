@@ -10,7 +10,6 @@ def layout():
             dcc.Tab(label="🎫 Clasificador de Tickets NLP", value='tab-nlp', className="text-light")
         ]),
         
-        # Carga el layout por defecto
         html.Div(id='m7-tab-content', children=layout_mining())
     ], fluid=True)
 
@@ -20,9 +19,19 @@ def layout_mining():
         dbc.CardBody([
             dbc.Row([
                 dbc.Col([
-                    html.P("Sube un CSV con 'CaseID' y 'Activity'. La app descubrirá cómo fluye el proceso REAL (no el teórico).", className="text-light mb-3"),
-                    dcc.Upload(id='m7-log-upload', children=html.Div(['Arrastra o ', html.A('Selecciona CSV', className="text-info")]),
-                        style={'width': '100%', 'height': '60px', 'lineHeight': '60px', 'borderWidth': '1px', 'borderStyle': 'dashed', 'borderColor': '#555', 'borderRadius': '5px', 'textAlign': 'center', 'margin': '10px 0', 'backgroundColor': '#333', 'color': 'white'}),
+                    html.P([
+                        "Sube un CSV con 'CaseID' y 'Activity' o ",
+                        html.A("descarga el log de eventos de prueba aquí", 
+                               href="https://raw.githubusercontent.com/OskrSC/nexusbi/main/data/eventos.csv", 
+                               target="_blank", 
+                               className="text-info font-weight-bold"),
+                        ". La app descubrirá cómo fluye el proceso REAL (no el teórico)."
+                    ], className="text-light mb-3"),
+                    dcc.Upload(
+                        id='m7-log-upload', 
+                        children=html.Div(['Arrastra o ', html.A('Selecciona CSV', className="text-info")]),
+                        style={'width': '100%', 'height': '60px', 'lineHeight': '60px', 'borderWidth': '1px', 'borderStyle': 'dashed', 'borderColor': '#555', 'borderRadius': '5px', 'textAlign': 'center', 'margin': '10px 0', 'backgroundColor': '#333', 'color': 'white'}
+                    ),
                     html.Div(id='m7-mining-status', className="text-muted mt-2")
                 ], width=4),
                 dbc.Col([
@@ -39,14 +48,17 @@ def layout_nlp():
             dbc.Row([
                 dbc.Col([
                     html.P("Pega el texto de un correo de soporte o queja. La IA extraerá la intención y el sentimiento.", className="text-light mb-3"),
-                    dcc.Textarea(id='m7-ticket-text', placeholder="Ej: 'El producto llegó roto y quiero mi dinero de vuelta, esto es inaceptable.'", 
-                                  style={'width': '100%', 'height': '200px', 'backgroundColor': '#333', 'color': 'white', 'border': '1px solid #555', 'borderRadius': '5px'}),
+                    # Se usa dcc.Textarea (no html.Textarea) para que el callback reaccione al escribir
+                    dcc.Textarea(
+                        id='m7-ticket-text', 
+                        placeholder="Ej: 'El producto llegó roto y quiero mi dinero de vuelta, esto es inaceptable.'", 
+                        style={'width': '100%', 'height': '200px', 'backgroundColor': '#333', 'color': 'white', 'border': '1px solid #555', 'borderRadius': '5px'}
+                    ),
                     html.Hr(className="border-secondary mt-4"),
                     html.H5("Resultado del Análisis:", className="text-light"),
                     html.Div(id='m7-nlp-result')
                 ], width=5),
                 dbc.Col([
-                    # Un panel visual de retroalimentación para el usuario
                     html.Div([
                         html.H2("🎯", className="text-center"),
                         html.H4(id='m7-intent-display', className="text-center text-light mt-2"),
